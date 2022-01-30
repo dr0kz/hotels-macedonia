@@ -31,7 +31,7 @@ public class HotelServiceImplementation implements HotelService {
 
     @Override
     public Page<Hotel> findAllHotelsInCity(String cityName, Pageable pageable) {
-        return this.hotelRepository.findAllByCityName(cityName, pageable);
+        return this.hotelRepository.findAllByCityName("%"+cityName+"%", pageable);
     }
 
     @Override

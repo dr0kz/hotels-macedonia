@@ -50,11 +50,4 @@ public class CityController {
         return "master-template";
     }
 
-    @GetMapping(value = "/bla")
-    public String post(@RequestBody String body) {
-        System.out.println("test");
-        return "master-template";
-    }
-
-
 }

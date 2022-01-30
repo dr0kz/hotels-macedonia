@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
+    @Query(value = "select * from dians.hotel h inner join dians.city c on c.id = h.city_id where c.name ilike ?1", nativeQuery = true)
+
     Page<Hotel> findAllByCityName(String cityName, Pageable pageable);
 
 
