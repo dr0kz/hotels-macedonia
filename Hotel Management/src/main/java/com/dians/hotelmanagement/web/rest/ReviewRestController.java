@@ -25,6 +25,7 @@ public class ReviewRestController {
         this.hotelService = hotelService;
     }
 
+    //Saves the review from the user and returns a list of all reviews in json format
     @GetMapping(produces = "application/json")
     @ResponseBody
     public List<Feedback> findAll(@RequestParam Long hotelId,

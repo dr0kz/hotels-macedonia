@@ -36,6 +36,8 @@ public class ScraperRepository {
                 .collect(Collectors.toList());
     }
 
+    //Scrapes all hotels from the https://macedonian-hotels.mk/hotels/cityName
+    //The hotels can be distributed on multiple pages on the website
     public List<Hotel> scrapeAllHotelsInCity() {
         List<Hotel> hotels = new ArrayList<>();
         this.cityRepository.findAll().forEach(city -> {
@@ -44,6 +46,7 @@ public class ScraperRepository {
                         Document document = Jsoup.connect(url).get();
                         int numberOfPages = document.select(".pagination li").size() / 2 - 2;
                         numberOfPages = numberOfPages <= 0 ? 1 : numberOfPages;
+                        //iterating all the pages
                         for (int i = 1; i <= numberOfPages; i++) {
                             Document specificCityOnPageDocument = Jsoup.connect(city.getWebsite() + "?page=" + i).get();
                             Elements specificCityBody = specificCityOnPageDocument.select(".media-list li");

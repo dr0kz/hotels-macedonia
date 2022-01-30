@@ -18,6 +18,7 @@ public class HotelScraper {
         this.scraperService = scraperService;
     }
 
+    //Runs every 30 days and checks for new hotels
     @Scheduled(fixedDelay = 2592000)
     public void scrapeNewHotels() throws IOException {
         this.scraperService.populateDatabase();

@@ -47,7 +47,7 @@ public class User implements UserDetails {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = Role.ROLE_USER; //site registrirani useri imaat default role
+        this.role = Role.ROLE_USER;
     }
 
     @Override

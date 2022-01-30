@@ -15,6 +15,7 @@ public class HotelsRestController {
         this.hotelService = hotelService;
     }
 
+    //Returns list of hotels for populating the map with all the hotels location in given city
     @GetMapping
     public List<Hotel> findAll(@RequestParam String cityName) {
         return this.hotelService.findAllHotelsInCity(cityName);
