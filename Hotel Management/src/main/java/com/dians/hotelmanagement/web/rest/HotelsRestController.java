@@ -1,7 +1,9 @@
 package com.dians.hotelmanagement.web.rest;
+
 import com.dians.hotelmanagement.model.Hotel;
 import com.dians.hotelmanagement.service.HotelService;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController

@@ -21,6 +21,7 @@ import java.util.stream.IntStream;
 public class CityController {
     private final HotelService hotelService;
     private final CityService cityService;
+
     public CityController(HotelService hotelService, CityService cityService) {
         this.hotelService = hotelService;
         this.cityService = cityService;
@@ -33,7 +34,7 @@ public class CityController {
         final int currentPage = page.orElse(1);
         final int currentPageSize = pageSize.orElse(5);
 
-        Page<Hotel> hotelsInCity = this.hotelService.findAllHotelsInCity(cityName, PageRequest.of(currentPage-1,currentPageSize));
+        Page<Hotel> hotelsInCity = this.hotelService.findAllHotelsInCity(cityName, PageRequest.of(currentPage - 1, currentPageSize));
 
         int totalPages = hotelsInCity.getTotalPages();
         if (totalPages > 0) {
@@ -43,14 +44,14 @@ public class CityController {
             model.addAttribute("pageNumbers", pageNumbers);
 
         }
-        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("currentPage", currentPage);
         model.addAttribute("hotels", hotelsInCity);
         model.addAttribute("bodyContent", "city");
         return "master-template";
     }
-    @GetMapping(value="/bla")
-    public String post(@RequestBody String body)
-    {
+
+    @GetMapping(value = "/bla")
+    public String post(@RequestBody String body) {
         System.out.println("test");
         return "master-template";
     }

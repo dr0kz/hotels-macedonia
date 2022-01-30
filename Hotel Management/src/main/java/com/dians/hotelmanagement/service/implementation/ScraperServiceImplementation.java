@@ -14,6 +14,7 @@ public class ScraperServiceImplementation implements ScraperService {
     private final ScraperRepository scraperRepository;
     private final CityRepository cityRepository;
     private final HotelRepository hotelRepository;
+
     public ScraperServiceImplementation(ScraperRepository scraperRepository, CityRepository cityRepository, HotelRepository hotelRepository) {
         this.scraperRepository = scraperRepository;
         this.cityRepository = cityRepository;
@@ -22,7 +23,7 @@ public class ScraperServiceImplementation implements ScraperService {
 
     @Override
     public void populateDatabase() throws IOException {
-        this.cityRepository.saveAll(this.scraperRepository.getAllCities());
-        this.hotelRepository.saveAll(this.scraperRepository.getAllHotelsInCity());
+        this.cityRepository.saveAll(this.scraperRepository.scrapeAllCities());
+        this.hotelRepository.saveAll(this.scraperRepository.scrapeAllHotelsInCity());
     }
 }

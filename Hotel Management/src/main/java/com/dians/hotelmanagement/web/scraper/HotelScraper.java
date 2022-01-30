@@ -12,11 +12,13 @@ import java.io.IOException;
 @EnableScheduling
 public class HotelScraper {
     private final ScraperService scraperService;
+
     public HotelScraper(ScraperService scraperService) {
 
         this.scraperService = scraperService;
     }
-    @Scheduled(fixedDelay = 20000000)
+
+    @Scheduled(fixedDelay = 2592000)
     public void scrapeNewHotels() throws IOException {
         this.scraperService.populateDatabase();
     }

@@ -34,7 +34,7 @@ public class HomeController {
         model.addAttribute("cities", cities);
         List<Hotel> mostPopular = this.hotelService.findMostPopularHotels();
         model.addAttribute("mostPopular", mostPopular);
-        model.addAttribute("bodyContent","home");
+        model.addAttribute("bodyContent", "home");
         return "master-template";
     }
 }

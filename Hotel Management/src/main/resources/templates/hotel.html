@@ -14,9 +14,10 @@
             integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
             crossorigin=""></script>
     <style>
-        .rating-stars:hover{
+        .rating-stars:hover {
             cursor: pointer;
         }
+
         @media only screen and (max-width: 600px) {
             .carousel-image {
                 width: 400px;
@@ -81,14 +82,18 @@
                     <h6 th:if="${hotel.getName()!=null}" th:text="'Name: ' + ${hotel.getName()}"></h6>
                     <h6 th:if="${hotel.getCheckIn() !=null}" th:text="'Check in: ' + ${hotel.getCheckIn()}"></h6>
                     <h6 th:if="${hotel.getCheckOut() !=null}" th:text="'Check out: ' + ${hotel.getCheckOut()}"></h6>
-                    <h6 th:if="${hotel.getFacilities() !=null}" th:text="'Facilities: ' + ${hotel.getFacilities()}"></h6>
-                    <h6 th:if="${hotel.getRoomFacilities() !=null}" th:text="'Room Facilities: ' + ${hotel.getRoomFacilities()}"></h6>
+                    <h6 th:if="${hotel.getFacilities() !=null}"
+                        th:text="'Facilities: ' + ${hotel.getFacilities()}"></h6>
+                    <h6 th:if="${hotel.getRoomFacilities() !=null}"
+                        th:text="'Room Facilities: ' + ${hotel.getRoomFacilities()}"></h6>
                     <div id="reserve-modal" title="Reservation info">
                         <h3></h3>
                         <h6 th:if="${hotel.getAddress() !=null}" th:text="'Address: ' + ${hotel.getAddress()}"></h6>
                         <h6 th:if="${hotel.getPhone() !=null}" th:text="'Phone: ' + ${hotel.getPhone()}"></h6>
                         <h6 th:if="${hotel.getFax() !=null}" th:text="'Fax: ' + ${hotel.getFax()}"></h6>
-                        <a style="font-size:15px !important; color:blue !important;" th:if="${hotel.getWebsite() !=null}" th:text="${hotel.getWebsite()}" th:href="@{'https://'+${hotel.getWebsite()}}"></a>
+                        <a style="font-size:15px !important; color:blue !important;"
+                           th:if="${hotel.getWebsite() !=null}" th:text="${hotel.getWebsite()}"
+                           th:href="@{'https://'+${hotel.getWebsite()}}"></a>
                     </div>
                     <div class="row mb-2">
                         <div class="col-12 d-flex justify-content-center">
@@ -109,13 +114,18 @@
     <div style="background-color: #c2c7c2;">
         <div class="container">
             <div id="leave-review" th:if="${!hasAlreadyRatedTheHotel}" sec:authorize="isAuthenticated()">
-                <div class="row" >
+                <div class="row">
                     <div class="col col-12 d-flex justify-content-center">
-                        <img width="30" height="30" class="rating-stars" number-stars="1" th:src="@{../images/emptyStar.png}"/>
-                        <img width="30" height="30" class="rating-stars" number-stars="2" th:src="@{../images/emptyStar.png}"/>
-                        <img width="30" height="30" class="rating-stars" number-stars="3" th:src="@{../images/emptyStar.png}"/>
-                        <img width="30" height="30" class="rating-stars" number-stars="4" th:src="@{../images/emptyStar.png}"/>
-                        <img width="30" height="30" class="rating-stars" number-stars="5" th:src="@{../images/emptyStar.png}"/>
+                        <img width="30" height="30" class="rating-stars" number-stars="1"
+                             th:src="@{../images/emptyStar.png}"/>
+                        <img width="30" height="30" class="rating-stars" number-stars="2"
+                             th:src="@{../images/emptyStar.png}"/>
+                        <img width="30" height="30" class="rating-stars" number-stars="3"
+                             th:src="@{../images/emptyStar.png}"/>
+                        <img width="30" height="30" class="rating-stars" number-stars="4"
+                             th:src="@{../images/emptyStar.png}"/>
+                        <img width="30" height="30" class="rating-stars" number-stars="5"
+                             th:src="@{../images/emptyStar.png}"/>
                     </div>
                 </div>
                 </br>
@@ -137,9 +147,10 @@
             <div class="comments">
                 <ul class="list-reviews">
                     <li th:each="review : ${reviews}">
-                        <div class="row"  style="border:2px solid black;background-color:gray;margin-top:2px;">
+                        <div class="row" style="border:2px solid black;background-color:gray;margin-top:2px;">
                             <div class="col col-12 d-flex justify-content-start">
-                                <h6 style="margin-top:auto; margin-bottom:auto; color:aqua;" th:text="${review.getUser().getFirstName()+' '+review.getUser().getLastName()}"></h6>
+                                <h6 style="margin-top:auto; margin-bottom:auto; color:aqua;"
+                                    th:text="${review.getUser().getFirstName()+' '+review.getUser().getLastName()}"></h6>
                                 <img th:each="star:${#numbers.sequence(1,review.getStars())}" width="30" height="30"
                                      th:src="@{../images/filledStar.png}"/>
                             </div>
@@ -197,40 +208,40 @@
     $(document).ready(function () {
         var alreadyRated = false;
         $('#review-section').hide();
-        $('.rating-stars').click(function(){
+        $('.rating-stars').click(function () {
             var starClickedValue = $(this).attr('number-stars');
             alreadyRated = true;
             $('#review-section').show();
-            $('.rating-stars').each(function(){
-                $(this).attr('src',$(this).attr('number-stars')<=starClickedValue ?
+            $('.rating-stars').each(function () {
+                $(this).attr('src', $(this).attr('number-stars') <= starClickedValue ?
                     '../images/filledStar.png' : '../images/emptyStar.png');
             })
         })
-        $('.rating-stars').hover(function(){
+        $('.rating-stars').hover(function () {
             var hoveredStarValue = $(this).attr('number-stars');
-            $('.rating-stars').each(function(){
-                $(this).attr('src',$(this).attr('number-stars')<=hoveredStarValue ?
+            $('.rating-stars').each(function () {
+                $(this).attr('src', $(this).attr('number-stars') <= hoveredStarValue ?
                     '../images/filledStar.png' : '../images/emptyStar.png');
             })
-        },function(){
-            if(!alreadyRated)
-            {
-                $('.rating-stars').each(function(){
+        }, function () {
+            if (!alreadyRated) {
+                $('.rating-stars').each(function () {
                     $(this).attr('src', '../images/emptyStar.png');
                 })
             }
 
         })
-        function calculateRating(){
+
+        function calculateRating() {
             var biggestValue = 0;
-            $('.rating-stars').each(function(){
-                if($(this).attr('src') === '../images/filledStar.png' && $(this).attr('number-stars')>biggestValue)
-                {
+            $('.rating-stars').each(function () {
+                if ($(this).attr('src') === '../images/filledStar.png' && $(this).attr('number-stars') > biggestValue) {
                     biggestValue = $(this).attr('number-stars');
                 }
             })
             return biggestValue;
         }
+
         $('#post-review').click(function () {
             $.ajax({
                 url: "/api/reviews?hotelId=" + '[[${hotel.id}]]' + "&reviewText="
@@ -244,18 +255,17 @@
                     for (var i = 0; i < data.length; i++) {
                         $(".list-reviews").append($('<div style="border:2px solid black;background-color:gray;margin-top:2px;" class="row">' +
                             '' +
-                            '<div class="col col-12 d-flex justify-content-start" id="stars' +data[i].feedbackId+'">'+
-                            '<h6 style="margin-top:auto; margin-bottom:auto; color:aqua;">' +data[i].user.firstName+
-                            ' ' +data[i].user.lastName+
+                            '<div class="col col-12 d-flex justify-content-start" id="stars' + data[i].feedbackId + '">' +
+                            '<h6 style="margin-top:auto; margin-bottom:auto; color:aqua;">' + data[i].user.firstName +
+                            ' ' + data[i].user.lastName +
                             '</h6>' +
                             '</div>' +
                             '<div class="col col-12">' +
-                            '<h6 style="color:white;">Review: '+data[i].reviewText+'</h6>' +
+                            '<h6 style="color:white;">Review: ' + data[i].reviewText + '</h6>' +
                             '</div>' +
                             '</div>'));
-                        for(var j = 0;j<data[i].stars;j++)
-                        {
-                            $('#stars'+data[i].feedbackId).append($('<img src="../images/filledStar.png" width="30" height="30"/>'));
+                        for (var j = 0; j < data[i].stars; j++) {
+                            $('#stars' + data[i].feedbackId).append($('<img src="../images/filledStar.png" width="30" height="30"/>'));
                         }
                     }
                 },
@@ -266,19 +276,19 @@
         });
         var dialog = $('#reserve-modal').dialog({
             autoOpen: false,
-            height:320,
-            width:410,
-            modal:true,
-            buttons:{
-                "Back": function(){
+            height: 320,
+            width: 410,
+            modal: true,
+            buttons: {
+                "Back": function () {
                     dialog.dialog("close")
                 }
             },
-            close: function(){
+            close: function () {
                 dialog.dialog("close");
             }
         })
-        $('.reserve-button').click(function(){
+        $('.reserve-button').click(function () {
             dialog.dialog("open");
         })
     })

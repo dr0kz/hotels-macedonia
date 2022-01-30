@@ -17,7 +17,6 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "users")
-
 public class User implements UserDetails {
 
     @Id
@@ -33,12 +32,13 @@ public class User implements UserDetails {
     @Column(name = "last_name", nullable = false, length = 20)
     private String lastName;
 
-    @Enumerated(value=EnumType.STRING)
+    @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonBackReference
     private List<Feedback> feedbacks;
+
     public User() {
     }
 

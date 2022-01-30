@@ -23,18 +23,19 @@ public class RegisterController {
 
     @GetMapping
     public String getRegisterPage(@RequestParam(required = false) String error, Model model) {
-        model.addAttribute("bodyContent","register");
+        model.addAttribute("bodyContent", "register");
         model.addAttribute("hasError", true);
-        model.addAttribute("error",error);
+        model.addAttribute("error", error);
         return "master-template";
     }
+
     @PostMapping
     public String register(@RequestParam String email,
                            @RequestParam String firstName,
                            @RequestParam String lastName,
                            @RequestParam String password,
                            @RequestParam String confirmPassword) {
-        try{
+        try {
             this.userService.register(email, firstName, lastName, password, confirmPassword);
             return "redirect:/login";
         } catch (UsernameAlreadyExistsException | InvalidArgumentsException | PasswordsDoNotMatchException exception) {

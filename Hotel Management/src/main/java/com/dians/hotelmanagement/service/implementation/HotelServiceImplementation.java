@@ -23,10 +23,12 @@ public class HotelServiceImplementation implements HotelService {
     public HotelServiceImplementation(HotelRepository hotelRepository) {
         this.hotelRepository = hotelRepository;
     }
+
     @Override
     public List<Hotel> findAll() {
         return this.hotelRepository.findAll();
     }
+
     @Override
     public Page<Hotel> findAllHotelsInCity(String cityName, Pageable pageable) {
         return this.hotelRepository.findAllByCityName(cityName, pageable);
@@ -40,19 +42,21 @@ public class HotelServiceImplementation implements HotelService {
     @Override
     public List<Hotel> findMostPopularHotels() {
         return this.hotelRepository.findAll().stream()
-                .sorted((k,v)->v.getFeedbacks().stream()
+                .sorted((k, v) -> v.getFeedbacks().stream()
                         .map(Feedback::getStars)
-                        .reduce(0,Integer::sum)
+                        .reduce(0, Integer::sum)
                         .compareTo(k.getFeedbacks().stream()
                                 .map(Feedback::getStars)
-                                .reduce(0,Integer::sum)))
+                                .reduce(0, Integer::sum)))
                 .limit(3)
                 .collect(Collectors.toList());
     }
+
     @Override
     public Hotel findHotelByCityNameAndHotelName(String cityName, String hotelName) {
         return this.hotelRepository.findHotelByCityNameAndName(cityName, hotelName);
     }
+
     @Override
     public void save(Hotel hotel) {
         this.hotelRepository.save(hotel);

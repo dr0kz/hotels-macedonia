@@ -21,30 +21,31 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
-@RequestMapping(value="/hotel")
+@RequestMapping(value = "/hotel")
 public class HotelController {
     private final HotelService hotelService;
     private final FeedbackService feedbackService;
     private final UserService userService;
+
     public HotelController(HotelService hotelService, FeedbackService feedbackService, UserService userService) {
         this.hotelService = hotelService;
         this.feedbackService = feedbackService;
         this.userService = userService;
     }
-    @GetMapping(value="/{name}")
+
+    @GetMapping(value = "/{name}")
     public String getHomePage(@RequestParam String city, @PathVariable String name, Model model) throws IOException {
         Hotel hotel = this.hotelService.findHotelByCityNameAndHotelName(city, name);
         model.addAttribute("hotel", hotel);
         model.addAttribute("longitude", hotel.getLongitude());
         model.addAttribute("latitude", hotel.getLatitude());
         model.addAttribute("hotelName", hotel.getName());
-        model.addAttribute("bodyContent","hotel");
-        model.addAttribute("reviews",feedbackService.listAllFeedbacksForHotel(hotel.getId()));
+        model.addAttribute("bodyContent", "hotel");
+        model.addAttribute("reviews", feedbackService.listAllFeedbacksForHotel(hotel.getId()));
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = null;
-        if(!(authentication instanceof AnonymousAuthenticationToken))
-        {
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
             user = (User) SecurityContextHolder
                     .getContext()
                     .getAuthentication()
@@ -52,9 +53,9 @@ public class HotelController {
         }
         model.addAttribute("hasAlreadyRatedTheHotel", user != null &&
                 userService.findByEmail(user.getEmail())
-                .getFeedbacks()
-                .stream()
-                .anyMatch(t -> Objects.equals(t.getHotel().getId(), hotel.getId())));
+                        .getFeedbacks()
+                        .stream()
+                        .anyMatch(t -> Objects.equals(t.getHotel().getId(), hotel.getId())));
         return "master-template";
     }
 }

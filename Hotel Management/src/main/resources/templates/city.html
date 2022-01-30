@@ -19,7 +19,7 @@
     <div class="container pt-2">
 
         <div class="row">
-            <div class="col col-12" >
+            <div class="col col-12">
                 <h6 style="text-align: left !important;" th:text="'Hotels in ' + ${city}"></h6>
             </div>
         </div>
@@ -53,7 +53,7 @@
         </div>
         <div class="row">
             <div class="col col-12 d-flex justify-content-center text-dark">
-                <a th:href="@{/hotels(cityName=${city}, page=${currentPage-1 == 0 ? 1 : currentPage-1})}">
+                <a th:href="@{/hotels(cityName=${city}, page=${currentPage-1})}">
                     <h6><</h6>
                 </a>
                 <div th:if="${hotels.getTotalPages() > 0}" class="pagination"
@@ -65,7 +65,7 @@
                             th:class="${pageNumber==hotels.getNumber() + 1} ? active"></h6>
                     </a>
                 </div>
-                <a th:href="@{/hotels(cityName=${city}, page=${currentPage+1 > hotels.getTotalPages() ? hotels.getTotalPages() : currentPage+1 })}">
+                <a th:href="@{/hotels(cityName=${city}, page=${currentPage+1})}">
                     <h6>></h6>
                 </a>
             </div>
@@ -73,8 +73,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="row border border-dark rounded bg-light mt-2 align-items-center hotel-info"
-                     th:each="hotel :${hotels.content}" th:attr="longitude=${hotel.getLongitude()}" >
-                    <div class="col col-12 col-md-4"  ><!-- hotel image -->
+                     th:each="hotel :${hotels.content}" th:attr="longitude=${hotel.getLongitude()}">
+                    <div class="col col-12 col-md-4"><!-- hotel image -->
                         <div>
                             <img style="border:1px solid white; border-radius:20px;" class="w-100"
                                  th:src="@{${hotel.getImages()[0]}}" alt="viu"/>
@@ -145,38 +145,38 @@
         crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         const previousColor = $('.custom-card').find('p').css('color');
-        $('.custom-card').hover(function(){
+        $('.custom-card').hover(function () {
             $(this).find('p')
-                .css('color','#25393f');
-        },function(){
+                .css('color', '#25393f');
+        }, function () {
             $(this).find('p')
-                .css('color',previousColor);
+                .css('color', previousColor);
         })
         $('#map').hide();
 
         $('.city-map-view').on('click', function () {
-            if($('#map').is(":visible")) $('#map').hide();
+            if ($('#map').is(":visible")) $('#map').hide();
             else $('#map').show();
             $.ajax({
-                url : "/api/hotels/?cityName="+'[[${city}]]',
-                type : "GET",
+                url: "/api/hotels/?cityName=" + '[[${city}]]',
+                type: "GET",
                 contentType: 'application/json',
                 dataType: 'json',
-                success : function(data) {
-                    if(data.length !== 0 )
-                    {
+                success: function (data) {
+                    if (data.length !== 0) {
                         populateMap(data);
                     }
 
                 },
-                error : function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     alert('error');
                 }
             });
         })
-        function populateMap(hotels){
+
+        function populateMap(hotels) {
             var map = L.map('map').setView([hotels[0].longitude, hotels[0].latitude], 10);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

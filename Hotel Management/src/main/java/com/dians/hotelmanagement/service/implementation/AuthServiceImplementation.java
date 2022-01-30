@@ -12,15 +12,17 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImplementation implements AuthService {
 
     private final UserRepository userRepository;
+
     public AuthServiceImplementation(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
     @Override
     public User login(String email, String password) {
-        if (email==null || email.isEmpty() || password==null || password.isEmpty()) {
+        if (email == null || email.isEmpty() || password == null || password.isEmpty()) {
             throw new InvalidArgumentsException();
         }
-        return userRepository.findByEmailAndPassword(email,password)
+        return userRepository.findByEmailAndPassword(email, password)
                 .orElseThrow(InvalidUserCredentialsException::new);
     }
 

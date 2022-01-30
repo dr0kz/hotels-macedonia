@@ -18,6 +18,7 @@ public class ReviewRestController {
     private final FeedbackService feedbackService;
     private final FeedbackRepository feedbackRepository;
     private final HotelService hotelService;
+
     public ReviewRestController(FeedbackService feedbackService, FeedbackRepository feedbackRepository, HotelService hotelService) {
         this.feedbackService = feedbackService;
         this.feedbackRepository = feedbackRepository;

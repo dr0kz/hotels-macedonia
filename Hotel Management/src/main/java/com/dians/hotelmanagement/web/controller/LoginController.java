@@ -21,27 +21,26 @@ public class LoginController {
     public LoginController(AuthService authService) {
         this.authService = authService;
     }
+
     @GetMapping
     public String getLoginPage(@RequestParam(required = false) String error, Model model) {
-        model.addAttribute("bodyContent","login");
+        model.addAttribute("bodyContent", "login");
         model.addAttribute("hasError", true);
-        model.addAttribute("error",error);
+        model.addAttribute("error", error);
         return "master-template";
     }
 
     @PostMapping
     public String login(HttpServletRequest request, Model model) {
         User user = null;
-        try{
-            user = this.authService.login(request.getParameter("email"),
-                    request.getParameter("password"));
+        try {
+            user = this.authService.login(request.getParameter("email"), request.getParameter("password"));
             request.getSession().setAttribute("user", user);
             return "redirect:/";
-        }
-        catch (InvalidUserCredentialsException exception) {
+        } catch (InvalidUserCredentialsException exception) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", exception.getMessage());
-            model.addAttribute("bodyContent","login");
+            model.addAttribute("bodyContent", "login");
             return "master-template";
         }
     }

@@ -34,9 +34,9 @@ public class FeedbackServiceImplementation implements FeedbackService {
 
     @Override
     public void addFeedbackToHotel(String user, Long hotel, String reviewText, int stars) {
-        User fromUser=userRepository.findByEmail(user).get();
-        Hotel toHotel=hotelRepository.findById(hotel).get();
-        Feedback feedback = new Feedback(reviewText,stars);
+        User fromUser = userRepository.findByEmail(user).get();
+        Hotel toHotel = hotelRepository.findById(hotel).get();
+        Feedback feedback = new Feedback(reviewText, stars);
         feedback.setHotel(toHotel);
         feedback.setUser(fromUser);
         feedbackRepository.save(feedback);

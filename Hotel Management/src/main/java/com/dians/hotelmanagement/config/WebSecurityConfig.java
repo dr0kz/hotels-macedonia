@@ -43,7 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/login")
                 .and()
-                .exceptionHandling().accessDeniedPage("/access_denied");
+                .exceptionHandling()
+                .accessDeniedPage("/access_denied");
 
     }
 
@@ -51,7 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(authenticationProvider);
     }
-
 
 
 }

@@ -13,7 +13,7 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length=100)
+    @Column(length = 100)
     private String name;
     private String website;
 
@@ -21,7 +21,8 @@ public class City {
     @JsonBackReference
     private List<Hotel> hotels;
 
-    public City() {}
+    public City() {
+    }
 
     public City(String name, String website) {
         this.name = name;

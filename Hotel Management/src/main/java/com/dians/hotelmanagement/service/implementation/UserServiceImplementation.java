@@ -24,21 +24,20 @@ public class UserServiceImplementation implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    private boolean isNullOrEmpty(String value)
-    {
-        return value==null || value.isEmpty();
+    private boolean isNullOrEmpty(String value) {
+        return value == null || value.isEmpty();
     }
+
     @Override
     public User register(String email, String firstName, String lastName, String password, String confirmPassword) {
-        if(isNullOrEmpty(email) || isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(password) || isNullOrEmpty(confirmPassword))
-        {
+        if (isNullOrEmpty(email) || isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(password) || isNullOrEmpty(confirmPassword)) {
             throw new InvalidArgumentsException();
         }
         if (!password.equals(confirmPassword))
             throw new PasswordsDoNotMatchException();
-        if(this.userRepository.findByEmail(email).isPresent())
+        if (this.userRepository.findByEmail(email).isPresent())
             throw new UsernameAlreadyExistsException(email);
-        User user = new User(email,passwordEncoder.encode(password),firstName,lastName);
+        User user = new User(email, passwordEncoder.encode(password), firstName, lastName);
         return userRepository.save(user);
 
     }
