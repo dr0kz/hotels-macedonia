@@ -36,7 +36,7 @@ public class HotelServiceImplementation implements HotelService {
 
     @Override
     public List<Hotel> findAllHotelsInCity(String cityName) {
-        return this.hotelRepository.findAllByCityName(cityName);
+        return this.hotelRepository.findAllByCityName("%"+cityName+"%");
     }
 
     @Override
