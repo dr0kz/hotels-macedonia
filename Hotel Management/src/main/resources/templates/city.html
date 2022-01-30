@@ -106,8 +106,8 @@
                             <div class="col col-12">
                                 <div class="border border-white bg-description p-1">
                                     <b><span style="color: #353f54;">About the hotel</span></b>
-                                    <p th:text="${hotel.getDescription().length() > 300 ? hotel.getDescription().substring(0,300)
-                                        : hotel.getDescription()+'...'}"></p>
+                                    <p th:text="${hotel.getDescription().length() > 300 ? hotel.getDescription().substring(0,300)+'...'
+                                        : hotel.getDescription()}"></p>
                                 </div>
                             </div>
                         </div>
